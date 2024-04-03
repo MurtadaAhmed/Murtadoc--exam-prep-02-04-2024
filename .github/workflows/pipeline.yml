@@ -20,7 +20,7 @@ jobs:
     - name: installing dependencies
       run: npm install
     - name: run unit tests
-      run: npm run test:uni
+      run: npm run test:unit
     - name: display SoftUni username
       run: echo "Murtadoc"
     
