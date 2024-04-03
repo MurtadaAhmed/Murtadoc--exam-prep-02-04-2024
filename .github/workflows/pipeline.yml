@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +24,22 @@ jobs:
     - name: display SoftUni username
       run: echo "Murtadoc"
     
+  ui_test:
+    needs: build_test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: installing dependencies
+      run: npm install
+    - name: install playwright dependencies
+      run: npx playwright install
+    - name: start the app
+      run: npm start &
+    - name: run UI tests
+      run: npm run test:ui     
